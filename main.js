@@ -46,7 +46,7 @@ function deleteItem(newItem) {
     items.splice(index, 1)
     newItem.remove()
 
-    warning.classList.toggle('active')
+    warning.classList.add('active')
 
     closeWarning.addEventListener('click', () => {
       warning.classList.remove('active')
