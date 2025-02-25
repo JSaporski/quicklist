@@ -1,12 +1,15 @@
-// Variáveis
 const form = document.querySelector('form')
 const input = form.querySelector('input')
 const list = document.querySelector('.list')
 const warning = document.querySelector('.warning')
+
 let items = []
 let itemID = 0
 
-// Adicionar item na lista
+let timeoutWarning = setTimeout(() => {
+  warning.classList.remove('active')
+}, 3500)
+
 function createItem(itemName, itemID) {
   if (!itemName || itemName === ' ') {
     return alert('Por favor, não deixe o nome vazio!')
@@ -29,13 +32,6 @@ function createItem(itemName, itemID) {
   return newItem
 }
 
-function addItem(newItem) {
-  items.push(newItem)
-  list.prepend(newItem)
-
-  itemID += 1
-}
-
 function deleteItem(newItem) {
   const btnDelete = newItem.querySelector('.delete')
 
@@ -52,10 +48,19 @@ function deleteItem(newItem) {
       warning.classList.remove('active')
     })
 
-    setTimeout(() => {
+    clearTimeout(timeoutWarning)
+
+    timeoutWarning = setTimeout(() => {
       warning.classList.remove('active')
     }, 3500)
   })
+}
+
+function addItem(newItem) {
+  items.push(newItem)
+  list.prepend(newItem)
+
+  itemID += 1
 }
 
 form.addEventListener('submit', event => {
